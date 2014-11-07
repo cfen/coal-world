@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)file://localhost/Users/cfenn/Desktop/forceLayoutTutorials/tute5.html -->
+<html>
+<head>
+	<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- CSS_START -->
+		<!--  <link rel="stylesheet" href="css/local-fonts.css"/> -->
+		<link rel="stylesheet" href="http://pasteup.guim.co.uk/0.0.5/css/fonts.pasteup.min.css"/>
+		<link rel="stylesheet" href="js/libs/noUiSlider.7.0.9/jquery.nouislider.css"/>
+		<link rel="stylesheet" href="css/main.css"/>
+
+		<!-- CSS_END -->
+		<!-- JS_START -->
+<title>Interactive</title>
+</head>
+
+<div id="top-bar"></div>
+	<div id="top-header">How the world uses coal</div>
+	<!-- <div id="top-header-sub">since 1980</div> -->
+<div class="wrapper">
+<div id="yearText" class="large-number-top"> </div>	
+<div class="copy-holder-top" id="copyHolderTop">
+	In the developed world, coal consumption, the fuel behind western industrialisation for almost three centuries, has been flatlining or slightly declining for the past three decades.
+			</div>
+			<!-- <div id="key-holder"></div> -->
+			<div id="button-holder">
+				<div class="buttonnav" id="button_Future">
+				  future
+				</div>
+
+				<!-- <div class="buttonnav" id="button_Trade">
+				  trade
+				</div> -->
+
+				<div class="buttonnav" id="button_Export">
+				  export
+				</div>
+
+				<div class="buttonnav" id="button_Import">
+				  import
+				</div>
+				
+				<div class="buttonnav-selected"  id="button_Production">
+				 production
+				</div>
+				
+				<div class="buttonnav" id="button_Consumption">
+				  consumption
+				</div>				
+
+			</div>
+			
+			
+			
+	
+			
+			<div id="heatmap-key">
+				<div class="key-item-title">Key</div>
+				<div class="key-item" id="key-item-1"><div class="key-item-color-one"></div>Megatonnes</div>
+				<div class="key-item" id="key-item-2"><div class="key-item-color-two"></div>100,000s of tonnes</div>
+				<!-- <div class="key-item-short" id="key-item-3"><div class="key-item-color-three"></div>Imports</div>
+				<div class="key-item-short" id="key-item-4"><div class="key-item-color-four"></div>Exports</div> -->
+				
+			</div>
+			<div id="graphic-holder">
+
+			</div>
+			
+			<div class="timeline">
+					<div class="progressContainer">
+							<!-- <div class="playButton" data-status="paused">
+
+							</div> -->
+							<div class="rangeContainer">
+							  		<div id="slider-range">
+							  			
+							  		</div>
+						  	</div>
+					</div>
+			</div>
+			<div id="factbox-holder">
+					<div id="col1" class="factbox-holder-col-left">
+						<div class="small-col-header"  id="countryTitle">Click the map to select a country</div>
+					</div>
+
+					<div id="col2" class="factbox-holder-col-center-left">
+						
+						<div id="col-2-number" class="large-number">611%</div>
+						<div class="number-caption" id="col-2-caption">Amount China's consumption grew between 1980 and 2012</div>
+					</div>
+
+
+					<div id="col3" class="factbox-holder-col-center-right">
+						<div id="col-3-number" class="large-number">3.7bn</div>
+						<div class="number-caption"  id="col-3-caption">The number of tonnes China burnt in 2013, China now burns almost as much coal as the rest of the world combined</div>
+						
+					</div>
+
+
+					<div id="col4" class="factbox-holder-col-right">
+						<div id="col-4-number" class="large-number">4x</div>
+						<div class="number-caption"  id="col-4-caption">China is also the world's biggest coal producer, digging up four times more coal than the next biggest miner the US</div>
+						
+					</div>
+			</div>
+			
+			
+			
+</div>	
+		
+
+
+
+
+
+<script src="http://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js" type="text/javascript"></script>
+<script src="js/libs/d3/d3.v3.min.js"></script>
+
+<script src='js/libs/jquery-1.10.1.min.js' type="text/javascript"></script>
+<script src='js/libs/TweenMax.min.js' type="text/javascript"></script>
+<script src="js/libs/touchmouse.js"></script>
+<script src="js/libs/underscore/underscore-min.js" charset="utf-8">
+<script src="js/libs/datejs/date-en-GB.js"></script>
+
+
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="js/libs/d3/d3.geom.js"></script>
+<script src="js/libs/d3/d3.layout.js"></script>
+<script src = "js/libs/d3/d3.geo.projection.v0.min.js"></script>
+
+<script src="js/libs/nouislider.js"></script>
+
+<script src="js/main.js"></script>
+<!--script src="js/forceLayout.js"></script -->
+
+<!--  USE THIS REMOTELY -->
+<!--<script src="//interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js" type="text/javascript"></script>-->
+<!--  USE THIS LOCALLY -->
+
+<script>
+
+
+
+// standard iframe functions
+function scrollPage(d) {
+	var scrollTo = d.pageYOffset + d.iframeTop + currentPosition;
+	iframeMessenger.scrollTo(0, scrollTo);
+}
+
+
+function forceIframeResize() {
+	var h = $("#wrapper").innerHeight();
+	iframeMessenger.resize(h);
+}
+</script>
+
+</body>
+</html>
