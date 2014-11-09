@@ -1,4 +1,4 @@
-var circleReduction = 10, globalStroke="#DCDCDC", globalFill = produceColor = "#005689", consumeColor = "#005689",  importColor = "#4bc6df", exportColor = "#4bc6df", futureColor="#767676",   minCircleSize = 30;
+var circleReduction = 10, globalStroke="#DCDCDC", globalCircleClip, globalCircleClipInner, globalFill = produceColor = "#005689", consumeColor = "#005689",  importColor = "#4bc6df", exportColor = "#4bc6df", globalStatsTitle="Global", futureColor="#767676",   minCircleSize = 30;
 var dataset, datasetProductionConsumption, dataSetFuture, datasetImportExport, dataSetTrade, dataSetGlobalKeyStats, data, focusArray,projection,svg, prodConArr, yearCapsArray, yearCompareStr="y1980", globalYear=1980;
 var pastYears = ['1980','1981','1982','1983','1984','1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012'];    
 var futureYears = ['2015','2020','2025','2030','2035','2040'];
@@ -80,6 +80,8 @@ function handleResponse(data) {
 
     dataSetGlobalKeyStats = data.sheets.Key_stats_global;
 
+    dataSetCountryKeyStats = data.sheets.Key_Stats_Countries;
+
     datasetTrade= data.sheets.Trade_Network;
 
     dataSetFuture = data.sheets.Future_Production_consumption;
@@ -125,7 +127,8 @@ function addMap(){
 
     svg = d3.select("#graphic-holder").append("svg")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .attr("id", "svg_worldmap");
 
         var path = d3.geo.path()
             .projection(projection);
@@ -167,6 +170,10 @@ function addCircleListeners(){
     $(".node, .nodeB").click( function (e){
         getCountryData(e);
     });
+
+    $("#svg_worldmap").click( function(e){
+        //setYearTexts(globalYear)
+    })
 
 }
 
@@ -266,8 +273,8 @@ function getCountryData(e){
     var ref = splitArr[1];
     
     var countryLongStr;
-    
-    var prevClipA, prevClipB;
+
+    var newCountryStatsObj;
     
 
     _.each(focusArray, function(item){
@@ -284,19 +291,36 @@ function getCountryData(e){
        
 
     });
+
+
+
+    _.each(dataSetCountryKeyStats, function(obj){
+
+        var tempArr = obj.country.split("_");
+
+        var checkCountryCode = tempArr[0]
+            if(ref == checkCountryCode)
+            {
+                newCountryStatsObj = obj;
+            }
+
+    })
             
     currClipA.css("opacity","1")
 
     currClipB.css("opacity","1")
 
+    globalCircleClip = currClipA;
+    globalCircleClipInner= currClipB;
+
     $('#countryTitle').html(countryLongStr);
     
-    $('#col-2-caption').html("changed col 2");
-    $('#col-2-number').html("200")
-    $('#col-3-caption').html("changed col 3")
-    $('#col-3-number').html("300")
-    $('#col-4-caption').html("changed col 4")
-    $('#col-4-number').html("400")
+    $('#col-2-caption').html(newCountryStatsObj.captiontxt1);
+    $('#col-2-number').html(newCountryStatsObj.caption1)
+    $('#col-3-caption').html(newCountryStatsObj.captiontxt2);
+    $('#col-3-number').html(newCountryStatsObj.caption2)
+    $('#col-4-caption').html(newCountryStatsObj.captiontxt3);
+    $('#col-4-number').html(newCountryStatsObj.caption3)
          
 }
 
@@ -450,8 +474,6 @@ function setYearTexts (y){
 
     d3.select("#yearText").html(y);
 
-    console.log(yearCapsArray[2]["yearstr"])
-
     _.each(yearCapsArray, function(item){
 
         if(item.yearstr == y){
@@ -468,6 +490,8 @@ function setYearTexts (y){
 
     d3.select("#copyHolderTop").html(newYearTxt);
 
+    d3.select("#countryTitle").html(globalStatsTitle)
+
     d3.select("#col-2-caption").html(statsObj.captionone);
     d3.select("#col-2-number").html(statsObj.statone);
 
@@ -477,7 +501,8 @@ function setYearTexts (y){
     d3.select("#col-4-caption").html(statsObj.captionthree);
     d3.select("#col-4-number").html(statsObj.statthree);
 
-
+     $(globalCircleClip).css("opacity","0.5");
+        $(globalCircleClipInner).css("opacity","0.5");
 
 
 }
