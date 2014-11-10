@@ -3,6 +3,8 @@ var dataset, datasetProductionConsumption, dataSetFuture, datasetImportExport, d
 var pastYears = ['1980','1981','1982','1983','1984','1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012'];    
 var futureYears = ['2015','2020','2025','2030','2035','2040'];
 
+var isMobile;
+
 var allYears = pastYears;
 
 var startYear = "y"+pastYears[0];
@@ -37,12 +39,7 @@ var makeUnselectable = function( $target ) {
 
 $(function() {
 
-    $(document).ready(function() {
-        
-
-    })  
-
-    if(!Array.indexOf) {// IE fix
+if(!Array.indexOf) {// IE fix
     Array.prototype.indexOf = function(obj) {
         for(var i = 0; i < this.length; i++) {
             if(this[i] === obj) {
@@ -57,6 +54,21 @@ $(function() {
 
 function init() {
 
+    $(document).ready(function() {
+        var windowWidth = $(window).width();
+
+        if (windowWidth < 600){
+            isMobile = true;
+        }
+
+        if (windowWidth > 600){
+            isMobile = false;
+        }
+
+        console.log(isMobile);
+
+    })  
+
     "use strict";
     
     var key = "1qZiBAmCI6OQOE2e5Bds-uwa8sHORYUIvkWK2ky_jnyg";               
@@ -66,6 +78,8 @@ function init() {
     $.getJSON(url, handleResponse);
 
     globalFilter = "f_productionAndConsumption";
+
+    adjustLayout();
 
 };
 
@@ -99,7 +113,8 @@ function buildView(){
 
     renderSlider();
     
-    addMap();
+
+    
     
     addListeners();
 
@@ -108,8 +123,14 @@ function buildView(){
     globalFilter = "f_production";
     globalFill = produceColor;
     circleReduction = 10;
+    if (!isMobile){
+            addMap();
+            addCirclesToMap();
+            $("#graphHolder").css("display","none");
+        }
 
-   addCirclesToMap();
+
+   
 
 }
 
@@ -117,8 +138,26 @@ function buildView(){
 function addMap(){
    
     var width = $("#graphic-holder").width();
-    var height = width * 0.66;
+    var height;
     var scalefactor = width/2/Math.PI; //width / 13;
+
+    if (width > 1200){
+        height = width * 0.45
+
+
+    }
+
+    if (width > 700 && width < 1200){
+        height = width * 0.45
+    }
+
+
+    if (width < 700){
+        height = width * 0.5
+    }
+
+$("#graphic-holder").css("height", height);
+
 
     projection = d3.geo.robinson()
             .center([-250, 80 ]) // -20, 20
@@ -142,6 +181,7 @@ function addMap(){
             .geometries)
             .enter()
             .append("path")
+            .attr("class","country")
             .attr("d", path)
         });
 
@@ -149,9 +189,21 @@ function addMap(){
     
     $(".key-item-color-two").css("background-color", importColor);
     
-    // $(".key-item-color-three").css("background-color", importColor);
+    $(".key-item-color-three").css("background-color", futureColor);
     
-    // $(".key-item-color-four").css("background-color", exportColor);    
+    // $(".key-item-color-four").css("background-color", exportColor);  
+
+}
+
+
+function adjustLayout(){
+
+    var tempWidth = $("#wrapper").width();
+
+
+    
+   // $("#graphic-holder").css("height", height);
+
 
 
 }
@@ -502,7 +554,7 @@ function setYearTexts (y){
     d3.select("#col-4-number").html(statsObj.statthree);
 
      $(globalCircleClip).css("opacity","0.5");
-        $(globalCircleClipInner).css("opacity","0.5");
+    $(globalCircleClipInner).css("opacity","0.5");
 
 
 }
@@ -562,7 +614,13 @@ function getYearData(y){
 
             });
 
+        if (!isMobile){
          upDateCircles(tempArr);
+        }
+
+        if (isMobile){
+         upDateGraph(tempArr);
+        }
     
 }
 
@@ -628,8 +686,29 @@ function upDateFilters(e){
 
     $('.buttonnav-selected').css('background-color',globalFill);
 
-    setNewSliderRange()
+    setNewSliderRange();
 
+    //setNewKeyDisplay();
+
+}
+
+
+function setNewKeyDisplay(){
+    console.log(globalFilter)
+
+    if (globalFilter == "f_future" || globalFilter == "f_production" || globalFilter == "f_consumption"){
+
+        $("#heatmap-key").html("<div class='key-item'>Showing megatonnes</div>");
+                
+    }
+
+    if (globalFilter == "f_import" || globalFilter == "f_export" ){
+
+        $("#heatmap-key").html("<div class='key-item'>Showing 100,000s of tonnes</div>");
+                
+    }
+
+    
 }
 
 
@@ -676,10 +755,16 @@ function setNewSliderRange(){
         }
         getYearData(globalYear)
 
-        timeSlider.val(0);
+        if(globalYear==1980){
+            timeSlider.val(0);
+        }
+
+        //
 }
 
 function upDateCircles(arrIn){
+
+    var tempArr = []
 
     _.each(arrIn, function(item){
 
@@ -695,14 +780,82 @@ function upDateCircles(arrIn){
             newVal = newVal;
            
         var newClip = "#circle_"+item.countrycode;
+        var newClipB = "#circle_"+item.countrycode+"_B";
         var circle = d3.select(newClip)
         
+        tempArr.push(newClip);
+        tempArr.push(newClipB);
+
         circle.transition()
             .duration(500)
             .attr("r", newVal)
             .attr("fill", fillColor);
         });
+
+    setCirclesView(tempArr);
         
+}
+
+
+function upDateGraph(arrIn){
+
+    var tempArr = []
+
+    _.each(arrIn, function(item){
+
+        
+        var newVal = (item.valA*0.25); 
+
+        console.log(newVal)
+            fillColor = globalFill;
+            strokeColor = globalStroke;
+            newVal = newVal;
+           
+        var newClip = "#bar_"+item.countrycode;
+        
+        tempArr.push(newClip);
+
+        $(newClip).css("width",newVal)
+
+})
+
+
+console.log(tempArr)
+        
+}
+
+function setCirclesView(arrIn){
+
+    var currClip;
+
+    var futureClips = ["#circle_CHN", "#circle_CHN_B", "#circle_USA", "#circle_USA_B","#circle_IND","#circle_IND_B"]
+
+    if (globalFilter =="f_future"){
+    _.each(arrIn, function(item){
+            $(item).css("display","none");
+                
+        });
+
+        _.each(futureClips, function(checkItem){
+            $(checkItem).css("display","inline");
+        })
+
+    }
+   
+    if (globalFilter !="f_future"){
+        _.each(arrIn, function(item){
+            $(item).css("display","inline");
+                
+        });
+
+    }
+
+    
+
+
+
+
+
 }
 
 

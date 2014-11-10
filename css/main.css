@@ -63,20 +63,7 @@ h6{
 
 /*timeline player*/
 
-.timeline{
-	background-color: #fff;
-    clear: right;
-    float: left;
-    max-width: 1260px;
-    min-width: 320px;
-    padding: 0 0 24px;
-    position: relative;
-    width: 100%;
-    top:0px;
-    left: 0px;
-    margin-left:-15px;
 
-}
 
 .progressContainer {
     width: 100%;
@@ -198,9 +185,10 @@ h6{
 
 
 .wrapper{
-	position:absolute;
-	top: 48px;
+	position:relative;
+	top: 0px;
 	left:0px;
+
 	background-color:#FFF;
 	min-width:320px;
 	max-width:1260px;
@@ -208,7 +196,7 @@ h6{
 }
 
 #top-bar{
-	position:absolute;
+	position:relative;
 	top:0px;
 	left:0px;
 	height:4px;
@@ -217,11 +205,12 @@ h6{
 }
 
 #top-header{
-	position:absolute;
+	position:relative;
 	float:left;
 	clear:right;
 	left:0px;
 	top:6px;
+	width:100%;
 	height:auto;
 	font-family:"Guardian Egyptian Headline", Georgia, serif;
 	font-size:2.2em;
@@ -229,6 +218,7 @@ h6{
 	font-weight:700;
 	text-align:left;
 	color: #005689;
+	padding-bottom:12px;
 }
 
 #top-header-sub{
@@ -383,9 +373,45 @@ h6{
 }
 
 
+/*graph CSS*/
+
+
+.graphBarHolder{
+	position:relative;
+	height:30px;
+	width:100%;
+	margin: 0 0 3px 0;
+	background-color:#CCC;
+	clear:right;
+	float:left;
+
+}
+
+.graphBarHolderInner{
+	position:relative;
+	height:30px;
+	background-color:#005689;
+	left:0px;
+	width:10px;
+
+}
+
+#graphHolder{
+	position: relative;
+	height:500px;
+	float:left;
+	clear:right;
+	width:100%;
+}
+
 /*MAP CSS */
 
 path {
+  stroke: none;
+  fill: #FFF;
+}
+
+path.country{
   stroke: white;
   stroke-width: 0.25px;
   fill: #dbdbd8;
@@ -484,15 +510,15 @@ line.link {
     clear: right;
     color: #005689;
     float: left;
-    font-family: "Guardian Egyptian Headline",Georgia,serif;
-    font-size: 2.2em;
+    font-family: "Guardian Agate Sans",Georgia,serif;
+    font-size: 1.5em;
     font-weight: 200;
     left: 0;
     line-height: 1.3em;
     margin: 0 0 12px 0px;
 
     padding: 3px 0 0 3px;
-    position: relative;
+    height:180px;
     width: 310px;
     background-color: #FFF;
 }
@@ -501,7 +527,7 @@ line.link {
 .large-number-top{
 	font-family: "Guardian Egyptian Headline", Georgia, serif;
 	font-weight:200;
-	font-size: 8.1em;
+	font-size: 3.6em;
 	float:left;
 
 	text-align: left;
@@ -521,6 +547,7 @@ line.link {
 	height:320px;
 	float:left;
 	clear:right;
+	display:none;
 }
 
 .factbox-holder-col-left{
@@ -540,7 +567,23 @@ line.link {
 	float:left;
 	padding-left: 0px;
 	border-bottom: 1px solid #dcdcdc;
-	height:60px;
+	height:auto;
+
+}
+
+
+.timeline{
+	background-color: #fff;
+    clear: right;
+    float: left;
+    max-width: 1260px;
+    min-width: 320px;
+    padding: 0 0 24px;
+    position: absolute;
+    width: 100%;
+    top:0px;
+    left: 0px;
+    margin-left:-15px;
 
 }
 
@@ -657,10 +700,11 @@ line.link {
 .factbox-holder-col-left{
 	position: relative;
 	width:140px;
-	height:300px;
+	height:auto;
 	float:left;
 	clear:right;
 	padding-right: 10px;
+	margin-bottom:100%;
 
 }
 
@@ -673,6 +717,22 @@ line.link {
 	padding-left: 10px;
 	border-left: 1px solid #dcdcdc;
 	height:240px;
+}
+
+
+.timeline{
+	background-color: #fff;
+    clear: right;
+    float: left;
+    max-width: 1260px;
+    min-width: 320px;
+    padding: 0 0 24px;
+    position: relative;
+    width: 100%;
+    top:0px;
+    left: 0px;
+    margin-left:-15px;
+
 }
 
 }
@@ -689,7 +749,7 @@ line.link {
     left: 0px;
     padding: 25px 0 3px 0px;
     position: absolute;
-    top: 90px;
+    top: 144px;
     width: 40%;
 }
 
@@ -742,7 +802,7 @@ line.link {
     font-size: 2.2em;
     font-weight: 200;
     line-height: 1.3em; 
-    margin: 0 0 12px 10px;
+    margin: 12px 0 12px 10px;
     max-width: 940px;
     min-width: 320px;
     padding: 3px 0 0 0;
@@ -790,9 +850,26 @@ line.link {
 	position: relative;
 	width:320px;
 	float:left;
+	clear:right;
 	padding-left: 10px;
 	border-left: 1px solid #dcdcdc;
 		height:240px;
+}
+
+
+.timeline{
+	background-color: #fff;
+    clear: right;
+    float: left;
+    max-width: 1260px;
+    min-width: 320px;
+    padding: 0 0 24px;
+    position: relative;
+    width: 100%;
+    top:0px;
+    left: 0px;
+    margin-left:-15px;
+
 }
 
 }
