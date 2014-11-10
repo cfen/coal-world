@@ -143,8 +143,6 @@ function addMap(){
 
     if (width > 1200){
         height = width * 0.45
-
-
     }
 
     if (width > 700 && width < 1200){
@@ -799,6 +797,8 @@ function upDateCircles(arrIn){
 
 function upDateGraph(arrIn){
 
+    var globalUnit = "megatonnes";
+
     var tempArr = []
 
     _.each(arrIn, function(item){
@@ -812,10 +812,14 @@ function upDateGraph(arrIn){
             newVal = newVal;
            
         var newClip = "#bar_"+item.countrycode;
+
+        var newCaption = "#cap_"+item.countrycode;
         
         tempArr.push(newClip);
 
         $(newClip).css("width",newVal)
+
+        $(newCaption).html(item.country+" "+item.valA+globalUnit)
 
 })
 
