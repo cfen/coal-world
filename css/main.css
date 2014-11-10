@@ -69,10 +69,10 @@ h6{
     float: left;
     max-width: 1260px;
     min-width: 320px;
-    padding: 6px 0 24px;
+    padding: 0 0 24px;
     position: relative;
     width: 100%;
-    top:12px;
+    top:0px;
     left: 0px;
     margin-left:-15px;
 
@@ -271,7 +271,7 @@ h6{
 
 #factbox-holder{
 	position: relative;
-	top:12px;
+	top:0px;
 	left:0px;
 	float:left;
 	clear:right;
@@ -576,17 +576,6 @@ line.link {
 	
 }
 
-#graphic-holder{
-	position: relative;
-	left:3px;
-	top:3px;
-	width: 100%;
-	height:560px;
-	float:left;
-	clear:right;
-}
-
-
 
 .buttonnav {
     float: left;
@@ -655,7 +644,6 @@ line.link {
 	color: #005689;
 }
 
-
 #graphic-holder{
 	position: relative;
 	left:3px;
@@ -699,7 +687,7 @@ line.link {
     clear: right;
     float: left;
     left: 0px;
-    padding: 24px 0 3px 0px;
+    padding: 25px 0 3px 0px;
     position: absolute;
     top: 90px;
     width: 40%;
@@ -708,26 +696,12 @@ line.link {
 #button-holder{
 	position: relative;
 	right:3px;
-	width: 100%;
+	width: 99%;
 	float:left;
 	clear:right;
   	text-align: center;
-  	padding-top:9px;
 	height:48px;	
 }
-
-#graphic-holder {
-    border-top: 1px solid #dcdcdc;
-    clear: right;
-    float: left;
-    height: 560px;
-    left: 3px;
-    position: relative;
-    top: 0;
-    width: 100%;
-}
-
-
 
 .buttonnav {
     float: right;
@@ -774,6 +748,7 @@ line.link {
     padding: 3px 0 0 0;
     position: relative;
     left: 0px;
+    height: 96px;
     width: 100%;
 }
 
@@ -789,14 +764,15 @@ line.link {
     width: 225px;
 }
 
-#graphic-holder{
-	position: relative;
-	left:3px;
-	top:3px;
-	width: 100%;
-	height:560px;
-	float:left;
-	clear:right;
+#graphic-holder {
+    border-top: 1px solid #dcdcdc;
+    clear: right;
+    float: left;
+    height: 564px;
+    left: 3px;
+    position: relative;
+    top: 0;
+    width: 100%;
 }
 
 .factbox-holder-col-left{

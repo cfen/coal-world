@@ -393,10 +393,10 @@ function setDate( value ){
 
 function addCirclesToMap(){
 
-        if (globalFilter=="f_future"){
-            $(".timeline").show();
-            addCirclesToMap();
-        }
+        // if (globalFilter=="f_future"){
+        //     $(".timeline").show();
+        //     addCirclesToMap();
+        // }
 
         d3.selectAll("circle").remove();
 
@@ -416,7 +416,7 @@ function addCirclesToMap(){
                     var newLon = datasetProductionConsumption[i]["lon"];
 
                         return {
-                            radius: (datasetProductionConsumption[i]["y1980"]/circleReduction), 
+                            radius: (datasetProductionConsumption[i]["c1980"]/circleReduction), 
                             lat: newLat, 
                             lon: newLon, 
                             fill: fillColor,
