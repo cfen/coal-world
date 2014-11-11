@@ -1,4 +1,4 @@
-var circleReduction = 10, globalStroke="#DCDCDC", globalCircleClip, globalCircleClipInner, globalFill = produceColor = "#005689", consumeColor = "#005689",  importColor = "#4bc6df", exportColor = "#4bc6df", globalStatsTitle="Global", futureColor="#767676",   minCircleSize = 30;
+var circleScaleFactor = 10, globalStroke="#DCDCDC", globalCircleClip, globalCircleClipInner, globalFill = produceColor = "#005689", consumeColor = "#005689",  importColor = "#4bc6df", exportColor = "#4bc6df", globalStatsTitle="Global", futureColor="#767676",   minCircleSize = 30;
 var dataset, datasetProductionConsumption, dataSetFuture, datasetImportExport, dataSetTrade, dataSetGlobalKeyStats, data, focusArray,projection,svg, prodConArr, yearCapsArray, yearCompareStr="y1980", globalYear=1980;
 var pastYears = ['1980','1981','1982','1983','1984','1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012'];    
 var futureYears = ['2015','2020','2025','2030','2035','2040'];
@@ -55,19 +55,30 @@ if(!Array.indexOf) {// IE fix
 function init() {
 
     $(document).ready(function() {
+        $('#graphHolder').hide();
+        $('#graphic-holder').hide();
+        $('#button-holder').hide();
+        $('#drop-down-holder').hide();
+
         var windowWidth = $(window).width();
 
-        if (windowWidth < 600){
+        if (windowWidth < 900){
             isMobile = true;
         }
 
-        if (windowWidth > 600){
+        if (windowWidth > 900){
             isMobile = false;
         }
 
-        console.log(isMobile);
-
-    })  
+        if(!isMobile){
+        $('#graphic-holder').show();
+        $('#button-holder').show();
+        }
+        if(isMobile){
+        $('#graphHolder').show();
+        $('#drop-down-holder').show();
+        }
+    });
 
     "use strict";
     
@@ -81,7 +92,7 @@ function init() {
 
     adjustLayout();
 
-};
+}
 
 
 function handleResponse(data) {
@@ -112,25 +123,22 @@ function handleResponse(data) {
 function buildView(){
 
     renderSlider();
-    
-
-    
-    
     addListeners();
 
     $('.buttonnav-selected').css('background-color',globalFill)
 
     globalFilter = "f_production";
     globalFill = produceColor;
-    circleReduction = 10;
+    circleScaleFactor = 10;
+
+
     if (!isMobile){
             addMap();
             addCirclesToMap();
-            $("#graphHolder").css("display","none");
         }
 
 
-   
+      addKeyColors();
 
 }
 
@@ -183,17 +191,19 @@ $("#graphic-holder").css("height", height);
             .attr("d", path)
         });
 
-    $(".key-item-color-one").css("background-color", produceColor);
-    
-    $(".key-item-color-two").css("background-color", importColor);
-    
-    $(".key-item-color-three").css("background-color", futureColor);
+ 
     
     // $(".key-item-color-four").css("background-color", exportColor);  
 
 }
 
-
+function addKeyColors(){
+    $(".key-item-color-one").css("background-color", produceColor);
+    
+    $(".key-item-color-two").css("background-color", importColor);
+    
+    $(".key-item-color-three").css("background-color", futureColor);
+}
 function adjustLayout(){
 
     var tempWidth = $("#wrapper").width();
@@ -206,6 +216,8 @@ function adjustLayout(){
 
 }
 
+
+
 function addListeners(){
     $(".playButton").click( function (e){
         autoPlayData(e);
@@ -214,7 +226,12 @@ function addListeners(){
     $(".buttonnav, .buttonnav-selected").click( function(e){
         upDateFilters(e);
     });
-}
+
+
+    $( "select" ).change(function (e) {
+        upDateFromSelectFilters(e);
+    })
+    }
 
 function addCircleListeners(){
     $(".node, .nodeB").click( function (e){
@@ -356,7 +373,7 @@ function getCountryData(e){
 
     })
             
-    currClipA.css("opacity","1")
+    currClipA.css("opacity","0.85")
 
     currClipB.css("opacity","1")
 
@@ -466,7 +483,7 @@ function addCirclesToMap(){
                     var newLon = datasetProductionConsumption[i]["lon"];
 
                         return {
-                            radius: (datasetProductionConsumption[i]["c1980"]/circleReduction), 
+                            radius: (datasetProductionConsumption[i]["c1980"]/circleScaleFactor), 
                             lat: newLat, 
                             lon: newLon, 
                             fill: fillColor,
@@ -622,7 +639,16 @@ function getYearData(y){
     
 }
 
+function upDateFromSelectFilters(e){
+    var newSort =  e.currentTarget.value;
+
+    handleUpdateFromFilter(newSort)
+
+    
+}
+
 function upDateFilters(e){ 
+
     $('.buttonnav-selected').removeClass( "buttonnav-selected" ).addClass( "buttonnav" );
 
 
@@ -636,31 +662,36 @@ function upDateFilters(e){
     //         addCirclesToMap();
     //     }
 
+    handleUpdateFromFilter(newSort)
+
+}
+
+function handleUpdateFromFilter(newSort){
     if (newSort=="button_Production"){
         globalFilter = "f_production";
         globalFill = produceColor;
-        circleReduction = 10;
+        circleScaleFactor = 10;
 
     }
 
     if (newSort=="button_Consumption"){
         globalFilter = "f_consumption";
         globalFill = consumeColor;
-        circleReduction = 10;
+        circleScaleFactor = 10;
 
     }
 
     if (newSort=="button_Import"){
         globalFilter = "f_import";
         globalFill = importColor;
-        circleReduction = 1;
+        circleScaleFactor = 1;
 
     }
 
     if (newSort=="button_Export"){
         globalFilter = "f_export";
         globalFill = exportColor;
-        circleReduction = 1;
+        circleScaleFactor = 1;
 
     }
 
@@ -674,7 +705,7 @@ function upDateFilters(e){
     if (newSort=="button_Future"){
         globalFilter = "f_future";
         globalFill = futureColor;
-        circleReduction = 10;
+        circleScaleFactor = 10;
 
    
       }
@@ -687,26 +718,6 @@ function upDateFilters(e){
     setNewSliderRange();
 
     //setNewKeyDisplay();
-
-}
-
-
-function setNewKeyDisplay(){
-    console.log(globalFilter)
-
-    if (globalFilter == "f_future" || globalFilter == "f_production" || globalFilter == "f_consumption"){
-
-        $("#heatmap-key").html("<div class='key-item'>Showing megatonnes</div>");
-                
-    }
-
-    if (globalFilter == "f_import" || globalFilter == "f_export" ){
-
-        $("#heatmap-key").html("<div class='key-item'>Showing 100,000s of tonnes</div>");
-                
-    }
-
-    
 }
 
 
@@ -767,7 +778,7 @@ function upDateCircles(arrIn){
     _.each(arrIn, function(item){
 
         var strokeColor, fillColor, newStrokeWidth;
-        var newVal = (item.valA/circleReduction); 
+        var newVal = (item.valA/circleScaleFactor); 
         
         if (newVal != 0){
             newVal+=minCircleSize;
@@ -797,34 +808,54 @@ function upDateCircles(arrIn){
 
 function upDateGraph(arrIn){
 
-    var globalUnit = "megatonnes";
+    $(".graphBarHolderInner").css("background-color", globalFill);
+    
 
-    var tempArr = []
+    var maxMeasureUnit = dataSetFuture[1]["c2035"];
+    measureUnit = $("#graphHolder").width()/maxMeasureUnit;
+
+    measureUnit = measureUnit/circleScaleFactor;
+    
+
+    
+
+    var globalUnit = "100,000s tonnes";
 
     _.each(arrIn, function(item){
-
+        var newVal = (item.valA); 
         
-        var newVal = (item.valA*0.25); 
-
-        console.log(newVal)
-            fillColor = globalFill;
-            strokeColor = globalStroke;
-            newVal = newVal;
-           
+        fillColor = globalFill;
+        strokeColor = globalStroke;
+          
         var newClip = "#bar_"+item.countrycode;
-
         var newCaption = "#cap_"+item.countrycode;
-        
-        tempArr.push(newClip);
+        var newCaptionStat = "#cap_"+item.countrycode+"_B";
+        var newW = newVal * measureUnit * circleScaleFactor;
 
-        $(newClip).css("width",newVal)
+        $(newClip).css("width", newW);
 
-        $(newCaption).html(item.country+" "+item.valA+globalUnit)
+        $(newCaption).html(item.country);
+        $(newCaptionStat).html(item.valA);
 
+
+
+        if ($(newCaption).width() < $(newClip).width() || $(newCaptionStat).width() < $(newClip).width()){
+            $(newCaption).css("margin-left", 3)
+            $(newCaptionStat).css("margin-left", 3)
+
+            $(newCaption).css("color", "#DCDCDC")
+            $(newCaptionStat).css("color", "#DCDCDC")
+        }
+
+        if ($(newCaption).width() > $(newClip).width() || $(newCaptionStat).width() > $(newClip).width()){
+            $(newCaption).css("margin-left", 3+$(newClip).width())
+            $(newCaptionStat).css("margin-left", 3+$(newClip).width())
+
+            $(newCaption).css("color", "#333")
+            $(newCaptionStat).css("color", globalFill)
+        }
 })
 
-
-console.log(tempArr)
         
 }
 

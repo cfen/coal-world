@@ -29,7 +29,7 @@ h3{
 	color: #333;
 }
 
-h4{
+h4{	
 	font-family: "Guardian Egyptian Headline", Georgia, serif;
 	font-weight: 400;
 	font-size: 2.4em;
@@ -190,7 +190,7 @@ h6{
 	left:0px;
 
 	background-color:#FFF;
-	min-width:320px;
+	min-width:300px;
 	max-width:1260px;
 	width:100%;
 }
@@ -377,18 +377,19 @@ h6{
 
 .graphBarHolder{
 	position:relative;
-	height:30px;
+	height:48px;
 	width:100%;
-	margin: 0 0 3px 0;
-	background-color:#CCC;
+	margin: 0 0 2px 0;
+	background-color:#EFEFEF;
 	clear:right;
 	float:left;
+
 
 }
 
 .graphBarHolderInner{
 	position:relative;
-	height:30px;
+	height:46px;
 	background-color:#005689;
 	left:0px;
 	width:10px;
@@ -399,20 +400,39 @@ h6{
 	position: relative;
 	float:left;
 	clear:right;
+
 	width:100%;
+
+	margin-bottom:36px;
+	padding:12px 0 12px;
+	border-bottom: 1px solid #DCDCDC;
 }
 
-.graphBarCaption{
-	font-family: "Guardian Agate Sans", "Helvetica", Helvetica, Arial, sans-serif;
+.graphBarCaptionTopStack{
+	font-family: "Guardian Egyptian Headline", "Georgia", Georgia, serif;
 	font-weight: 400;
-	font-size: 2.2em;
-	line-height: 1.2em;
-	position: relative;
+	font-size: 1.3em;
+	line-height: 0.9em;
+	position: absolute;
+	top:0px;
 	float:left;
 	clear:right;
-	width:100%;
+	width:auto;
 	
-	margin: 0 0 12px 0;
+	margin:3px 0 1px  3px;
+}
+.graphBarCaptionBottomStack{
+	clear: right;
+    float: left;
+    font-family: "Guardian Egyptian Headline","Georgia",Georgia,serif;
+    font-size: 2.7em;
+    font-weight: 400;
+    line-height: 1.2em;
+    position: absolute;
+    top: 9px;
+    width: auto;
+	
+	margin:6px 0 0 3px;
 }
 
 /*MAP CSS */
@@ -462,13 +482,47 @@ line.link {
 #heatmap-key{
 	background-color: rgba(255, 255, 255, 1);
     clear: right;
+    display: inline;
     float: left;
     left: 0;
-    padding: 24px 0 3px 6px;
-    position: relative;
-    top: 0;
-    width: 100%;
-    display:none;
+    padding: 36px 0 3px;
+    position: absolute;
+    top: 228px;
+    width: 320px;
+}
+
+
+.key-item-title, .key-item-title-short, .key-item, .key-item-short{
+	width:100px;
+	height:auto;
+	float:left;
+	clear:right;
+	padding-left: 12px;
+	font-family: "Guardian Agate Sans", Arial, sans-serif;
+	font-weight: 600;
+	font-size:1.2em;
+	line-height: 1.5em;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.key-item{
+	width:auto;
+	font-weight: 400;
+	
+}
+
+.key-item-short{
+	width:auto;
+	font-weight: 400;
+}
+
+.key-item-title {
+	width:auto;
+	float:left;
+	clear:right;
+	padding-left:3px;
+
 }
 	
 #button-holder{
@@ -477,18 +531,16 @@ line.link {
 	top:48px;
 
 	width: 100%;
-	float:left;
-	clear:right;
+	float:right;
+	clear:left;
   	text-align: center;
   	padding-top:23px;
 	height:auto;
-
-	
 }
 
 
 .buttonnav {
-    float: left;
+    float: right;
     width:100px;
 	height:25px;
 	border-radius: 16px;
@@ -504,7 +556,7 @@ line.link {
 }
 
 .buttonnav-selected {
-    float: left;
+    float: right;
     width:100px;
 	height:25px;
 	border-radius: 16px;
@@ -519,35 +571,36 @@ line.link {
 
 
 .copy-holder-top {
+     background-color: #fff;
     clear: right;
     color: #005689;
     float: left;
     font-family: "Guardian Agate Sans",Georgia,serif;
     font-size: 1.5em;
     font-weight: 200;
+    height: 180px;
     left: 0;
     line-height: 1.3em;
-    margin: 0 0 12px 0px;
+    margin: 0 0 12px;
     padding: 3px 0 0 3px;
-    height:180px;
+    position: absolute;
+    top: 836px;
     width: 310px;
-    background-color: #FFF;
-    position:absolute;
-    top:264px;
 }
 
 
 .large-number-top{
-	position:absolute;
-	top: 216px;
-	font-family: "Guardian Egyptian Headline", Georgia, serif;
-	font-weight:200;
-	font-size: 4.8em;
-	float:left;
-	text-align: left;
-	padding: 0px 10px 0px 0px;
-	width: auto;
-	color: #005689;
+	border-top: 1px solid #dcdcdc;
+    color: #005689;
+    float: left;
+    font-family: "Guardian Egyptian Headline",Georgia,serif;
+    font-size: 4.8em;
+    font-weight: 200;
+    padding: 3px 10px 0 0;
+    position: absolute;
+    text-align: left;
+    top: 144px;
+    width: 98%;
 }
 
 #graphic-holder{
@@ -562,8 +615,10 @@ line.link {
 }
 
 #graphHolder{
-	position:absolute;
-	top:480px;
+	border-top: 1px solid #dcdcdc;
+    position: absolute;
+    top: 288px;
+    width: 100%;
 }
 
 .factbox-holder-col-left{
@@ -589,13 +644,13 @@ line.link {
 
 #factbox-holder{
 	position: absolute;
-	top:1200px;
+	top:980px;
 	left:0px;
 	float:left;
 	clear:right;
 	margin:0 0 12px 6px;
 	max-width: 1260px;
-	min-width:320px;
+	min-width:300px;
 	width:100%;
 
 	background-color: #FFF;
@@ -603,19 +658,27 @@ line.link {
 
 
 .timeline{
-	border-top: 1px solid #dcdcdc;
+
 	background-color: #fff;
     clear: right;
     float: left;
     max-width: 1260px;
     min-width: 320px;
-    padding: 0 0 24px;
+    padding: 0 0 12px;
     position: absolute;
-    width: 100%;
-    top:396px;
+    width: 90%;
+    top:196px;
     left: 0px;
-    margin-left:-15px;
+    margin-left: 0;
 
+}
+
+#drop-down-holder{
+	position:relative;
+	top:24px;
+	width:90%;
+	padding:24px 0 0 0;
+	display:block;
 }
 
 
@@ -623,7 +686,7 @@ line.link {
 
 
 
-@media only screen and (min-width : 600px) and (max-width : 1224px){
+@media only screen and (min-width : 600px) and (max-width : 1155px){
 
 #heatmap-key{
 	background-color: rgba(255, 255, 255, 1);
@@ -640,20 +703,17 @@ line.link {
 	position: relative;
 	left:3px;
 	top:3px;
-
 	width: 100%;
 	float:left;
 	clear:right;
   	text-align: center;
   	padding-top:23px;
 	height:auto;
-
-	
 }
 
 
 .buttonnav {
-    float: left;
+    float: right;
     width:100px;
 	height:25px;
 	border-radius: 16px;
@@ -669,7 +729,7 @@ line.link {
 }
 
 .buttonnav-selected {
-    float: left;
+    float: right;
     width:100px;
 	height:25px;
 	border-radius: 16px;
@@ -726,6 +786,7 @@ line.link {
 	width: 100%;
 	float:left;
 	clear:right;
+	border-top: 1px solid #dcdcdc;
 }
 
 .factbox-holder-col-left{
@@ -766,19 +827,26 @@ line.link {
 }
 
 .timeline{
-	border-top: 1px solid #dcdcdc;
+	
 	background-color: #fff;
     clear: right;
     float: left;
     max-width: 1260px;
     min-width: 320px;
-    padding: 0 0 24px;
+    padding: 0 0 12px;
     position: relative;
     width: 100%;
     top:0px;
     left: 0px;
-    margin-left:-15px;
 
+}
+
+#drop-down-holder{
+	position:relative;
+	top:24px;
+	width:90%;
+	padding:24px 0 0 0;
+	display:none;
 }
 
 }
@@ -786,7 +854,7 @@ line.link {
 
 
 
-@media only screen and (min-width : 1225px) {
+@media only screen and (min-width : 1156px) {
 
 #heatmap-key{
 	/*background-color: rgba(255, 255, 255, 1);*/
@@ -802,7 +870,7 @@ line.link {
 #button-holder{
 	position: relative;
 	right:3px;
-	width: 99%;
+	width: 100%;
 	float:left;
 	clear:right;
   	text-align: center;
@@ -878,6 +946,7 @@ line.link {
     position: relative;
     top: 0;
     width: 100%;
+    border-top: 1px solid #dcdcdc;
 }
 
 .factbox-holder-col-left{
@@ -896,9 +965,8 @@ line.link {
 	width:320px;
 	float:left;
 	clear:right;
-	padding-left: 10px;
 	border-left: 1px solid #dcdcdc;
-		height:240px;
+	height:240px;
 }
 
 
@@ -917,19 +985,50 @@ line.link {
 }
 
 .timeline{
-	border-top: 1px solid #dcdcdc;
+	
 	background-color: #fff;
     clear: right;
     float: left;
     max-width: 1260px;
     min-width: 320px;
-    padding: 0 0 24px;
+    padding: 0 0 12px;
     position: relative;
     width: 100%;
     top:0px;
     left: 0px;
     margin-left:-15px;
 
+#drop-down-holder{
+	position:relative;
+	top:24px;
+	width:90%;
+	padding:24px 0 0 0;
+	display:none;
+}
+
 }
 }
 
+
+
+.drop-down-Text{
+	postion: relative;
+	left: 0px;
+	top:24px;
+	float: left;
+    font-family: "Guardian Egyptian Headline",Georgia,serif;
+    font-size: 1.8em;
+    font-weight: 500;
+    color:#005689;
+    padding:0 12px 0 0;
+}
+
+
+#drop-down-menu{
+ width:180px;  
+}
+
+
+#drop-down-menu option{
+  width:180px;  
+}
