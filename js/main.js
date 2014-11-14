@@ -83,12 +83,14 @@ function init() {
     "use strict";
     
     var key = "1qZiBAmCI6OQOE2e5Bds-uwa8sHORYUIvkWK2ky_jnyg";               
-    
-    var url = "http://interactive.guim.co.uk/spreadsheetdata/" + key + ".json";
+    var urlLocal = "js/data.json";
+    var url = "http://interactive.guim.co.uk/spreadsheetdata/1qZiBAmCI6OQOE2e5Bds-uwa8sHORYUIvkWK2ky_jnyg.json";
     
     $.getJSON(url, handleResponse);
 
     globalFilter = "f_productionAndConsumption";
+
+
 
     adjustLayout();
 
@@ -122,6 +124,8 @@ function handleResponse(data) {
 
 function buildView(){
 
+
+
     renderSlider();
     addListeners();
 
@@ -139,6 +143,8 @@ function buildView(){
 
 
       addKeyColors();
+
+      $('#loading').hide();
 
 }
 
@@ -179,7 +185,7 @@ $("#graphic-holder").css("height", height);
             .projection(projection);
 
         var g = svg.append("g");
-
+        console.log('hey')
         // load and display the World
         d3.json("world-110m2.json", function(error, topology) {
             g.selectAll("path")
@@ -539,14 +545,17 @@ function setYearTexts (y){
 
     var statsObj = {};
 
+    var mobileHead = "<span class='notes-header'>Notes–"+globalYear+"</span><br/>";
+
     d3.select("#yearText").html(y);
 
     _.each(yearCapsArray, function(item){
 
         if(item.yearstr == y){
             newYearTxt = item.captionstr;
+
         }
-    });
+     });
 
 
     _.each(dataSetGlobalKeyStats, function(item){
@@ -554,6 +563,9 @@ function setYearTexts (y){
             statsObj = item;
         }
     });
+    if(isMobile){
+            newYearTxt = mobileHead+newYearTxt;
+        }
 
     d3.select("#copyHolderTop").html(newYearTxt);
 
@@ -587,26 +599,31 @@ function getYearData(y){
         if (globalFilter == "f_import"){
             focusArray = datasetImportExport;
             yearCompareStr = "i"+y;
+            circleScaleFactor = 1.5;
         }
 
         if (globalFilter == "f_export"){
             focusArray = datasetImportExport;
             yearCompareStr = "e"+y;
+            circleScaleFactor = 1.5;
         }
 
         if (globalFilter == "f_production"){
             focusArray = datasetProductionConsumption;
             yearCompareStr = "y"+y;
+            circleScaleFactor = 10;
         }
 
         if (globalFilter == "f_consumption"){
             focusArray = datasetProductionConsumption;
             yearCompareStr = "c"+y;
+            circleScaleFactor = 10;
         }
 
         if (globalFilter == "f_future"){
             focusArray = dataSetFuture;            
             yearCompareStr = "c"+y;
+            circleScaleFactor = 10;
         }
 
         _.each(focusArray, function(item){
@@ -667,31 +684,33 @@ function upDateFilters(e){
 }
 
 function handleUpdateFromFilter(newSort){
+
+
     if (newSort=="button_Production"){
         globalFilter = "f_production";
         globalFill = produceColor;
-        circleScaleFactor = 10;
+        
 
     }
 
     if (newSort=="button_Consumption"){
         globalFilter = "f_consumption";
         globalFill = consumeColor;
-        circleScaleFactor = 10;
+       
 
     }
 
     if (newSort=="button_Import"){
         globalFilter = "f_import";
         globalFill = importColor;
-        circleScaleFactor = 1;
+      
 
     }
 
     if (newSort=="button_Export"){
         globalFilter = "f_export";
         globalFill = exportColor;
-        circleScaleFactor = 1;
+        
 
     }
 
@@ -705,11 +724,9 @@ function handleUpdateFromFilter(newSort){
     if (newSort=="button_Future"){
         globalFilter = "f_future";
         globalFill = futureColor;
-        circleScaleFactor = 10;
+   }
 
-   
-      }
-
+    showFutureBarChart(newSort);
 
     getYearData(globalYear);
 
@@ -718,6 +735,44 @@ function handleUpdateFromFilter(newSort){
     setNewSliderRange();
 
     //setNewKeyDisplay();
+}
+
+function showFutureBarChart(newSort){
+
+        $('#bar_IDN').show();
+        $('#bar_RUS').show();
+        $('#bar_ZAF').show();
+        $('#bar_DEU').show();
+        $('#bar_GBR').show();
+        $('#cap_IDN').show();
+        $('#cap_RUS').show();
+        $('#cap_ZAF').show();
+        $('#cap_DEU').show();
+        $('#cap_GBR').show();
+        $('#cap_IDN_B').show();
+        $('#cap_RUS_B').show();
+        $('#cap_ZAF_B').show();
+        $('#cap_DEU_B').show();
+        $('#cap_GBR_B').show();
+
+
+     if (newSort=="button_Future"){
+        $('#bar_IDN').hide();
+        $('#bar_RUS').hide();
+        $('#bar_ZAF').hide();
+        $('#bar_DEU').hide();
+        $('#bar_GBR').hide();
+         $('#cap_IDN').hide();
+        $('#cap_RUS').hide();
+        $('#cap_ZAF').hide();
+        $('#cap_DEU').hide();
+        $('#cap_GBR').hide();
+        $('#cap_IDN_B').hide();
+        $('#cap_RUS_B').hide();
+        $('#cap_ZAF_B').hide();
+        $('#cap_DEU_B').hide();
+        $('#cap_GBR_B').hide();
+    }
 }
 
 
@@ -810,16 +865,23 @@ function upDateGraph(arrIn){
 
     $(".graphBarHolderInner").css("background-color", globalFill);
     
+    var graphScaleFactor; 
+
+    console.log(globalFilter)
+
+    if (globalFilter=="f_import" || globalFilter=="f_export") {
+        graphScaleFactor = 10;
+    }else{
+        graphScaleFactor = 10;
+    }
+
+    console.log(graphScaleFactor)
 
     var maxMeasureUnit = dataSetFuture[1]["c2035"];
     measureUnit = $("#graphHolder").width()/maxMeasureUnit;
 
-    measureUnit = measureUnit/circleScaleFactor;
+    measureUnit = measureUnit/graphScaleFactor;
     
-
-    
-
-    var globalUnit = "100,000s tonnes";
 
     _.each(arrIn, function(item){
         var newVal = (item.valA); 
@@ -830,7 +892,7 @@ function upDateGraph(arrIn){
         var newClip = "#bar_"+item.countrycode;
         var newCaption = "#cap_"+item.countrycode;
         var newCaptionStat = "#cap_"+item.countrycode+"_B";
-        var newW = newVal * measureUnit * circleScaleFactor;
+        var newW = newVal * measureUnit * graphScaleFactor;
 
         $(newClip).css("width", newW);
 

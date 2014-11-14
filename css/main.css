@@ -63,7 +63,21 @@ h6{
 
 /*timeline player*/
 
-
+#loading {
+	font-size: 14px;
+	font-family: Arial;
+	background-color: #fff;
+	height: 460px;
+	padding-top: 240px;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	line-height: 18px;
+	z-index: 100000;
+	left: 0;
+	top: 0;
+	color: #999;
+}
 
 .progressContainer {
     width: 100%;
@@ -296,10 +310,10 @@ h6{
 
 .large-number{
 	font-family: "Guardian Egyptian Headline", Georgia, serif;
-	font-weight:200;
+	font-weight: 200;
 	font-size: 8.4em;
-	float:left;
-	clear:right;
+	float: left;
+	clear: right;
 	text-align: left;
 	width: 100%;
 	padding: 3px 10px 12px 10px;
@@ -316,7 +330,7 @@ h6{
 	line-height: 1.2em;
 	font-weight:200;
 	text-align:left;
-	color:#bdbdbd;
+	color:#767676;
 	padding: 3px 10px 24px 10px;
 	clear: both;
 	/*border-bottom: 1px dotted #005689;*/
@@ -479,6 +493,13 @@ line.link {
 	width:20px;
 }
 
+.notes-header{
+	font-family: "Guardian Agate Sans", Arial, sans-serif;
+	font-weight: 600;
+	
+	
+}
+
 #heatmap-key{
 	background-color: rgba(255, 255, 255, 1);
     clear: right;
@@ -541,12 +562,13 @@ line.link {
 
 .buttonnav {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 12px 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	overflow:hidden;
@@ -557,12 +579,13 @@ line.link {
 
 .buttonnav-selected {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 12px 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	color: #FFFFFF;
@@ -588,20 +611,25 @@ line.link {
     width: 310px;
 }
 
+.copy-holder-top b{
+	font-weight:500;
+	}
+
 
 .large-number-top{
 	border-top: 1px solid #dcdcdc;
-    color: #005689;
-    float: left;
-    font-family: "Guardian Egyptian Headline",Georgia,serif;
-    font-size: 4.8em;
-    font-weight: 200;
-    padding: 3px 10px 0 0;
-    position: absolute;
-    text-align: left;
-    top: 144px;
-    width: 98%;
+	color: #005689;
+	float: left;
+	font-family: "Guardian Egyptian Headline",Georgia,serif;
+	font-size: 4.5em;
+	font-weight: 200;
+	padding: 3px 10px 0 0;
+	position: absolute;
+	text-align: left;
+	top: 120px;
+	width: 98%;
 }
+
 
 #graphic-holder{
 	position: relative;
@@ -623,14 +651,11 @@ line.link {
 
 .factbox-holder-col-left{
 	position: relative;
-	width:310px;
-	height:60px;
-	float:left;
-	clear:right;
-	padding-right: 10px;
+	width: 300px;
+	height: 24px;
+	float: left;
+	clear: right;
 }
-
-
 
 .factbox-holder-col-right, .factbox-holder-col-center-left, .factbox-holder-col-center-right{
 	position: relative;
@@ -644,32 +669,30 @@ line.link {
 
 #factbox-holder{
 	position: absolute;
-	top:980px;
-	left:0px;
-	float:left;
-	clear:right;
-	margin:0 0 12px 6px;
+	top: 980px;
+	left: 0px;
+	float: left;
+	clear: right;
+	margin: 12px 0 12px 6px;
 	max-width: 1260px;
-	min-width:300px;
-	width:100%;
-
+	min-width: 300px;
+	width: 100%;
 	background-color: #FFF;
 }
 
 
 .timeline{
-
 	background-color: #fff;
-    clear: right;
-    float: left;
-    max-width: 1260px;
-    min-width: 320px;
-    padding: 0 0 12px;
-    position: absolute;
-    width: 90%;
-    top:196px;
-    left: 0px;
-    margin-left: 0;
+	clear: right;
+	float: left;
+	max-width: 1260px;
+	min-width: 320px;
+	padding: 0 0 12px;
+	position: absolute;
+	width: 90%;
+	top: 180px;
+	left: -30px;
+	margin-left: 0;
 
 }
 
@@ -680,6 +703,52 @@ line.link {
 	padding:24px 0 0 0;
 	display:block;
 }
+
+.number-caption{
+	font-family: "Guardian Agate Sans", "Helvetica", Arial, sans-serif;
+	font-weight: 400;
+	font-size: 1.5em;
+	line-height: 1.2em;
+	font-weight:200;
+	text-align:left;
+	color:#767676;
+	padding: 1px 10px 12px 0;
+	clear: both;
+	/*border-bottom: 1px dotted #005689;*/
+}
+
+
+.large-number{
+	font-family: "Guardian Egyptian Headline", Georgia, serif;
+	font-weight: 200;
+	font-size: 3em;
+	float: left;
+	clear: right;
+	text-align: left;
+	width: 100%;
+	padding: 3px 10px 0 0;
+	margin: 0;
+	color: #bdbdbd;
+}
+
+
+.small-col-header{
+	clear: right;
+    color: #005689;
+    float:left;
+	clear:right;
+	text-align: left;
+	position: relative;
+	left: 0;
+	padding-top:3px;
+    font-family: "Guardian Agate Sans", "Helvetica", Arial, sans-serif;
+	font-weight: 600;
+	font-size: 1.5em;
+	line-height: 1.2em;
+    height: auto;
+
+}
+
 
 
 }
@@ -714,12 +783,13 @@ line.link {
 
 .buttonnav {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 12px 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	overflow:hidden;
@@ -730,12 +800,13 @@ line.link {
 
 .buttonnav-selected {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 12px 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	color: #FFFFFF;
@@ -861,7 +932,7 @@ line.link {
     clear: right;
     float: left;
     left: 0px;
-    padding: 25px 0 3px 0px;
+    padding: 0 0 3px 0px;
     position: absolute;
     top: 144px;
     width: 40%;
@@ -879,12 +950,13 @@ line.link {
 
 .buttonnav {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 0 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	overflow:hidden;
@@ -895,12 +967,13 @@ line.link {
 
 .buttonnav-selected {
     float: right;
-    width:100px;
+    width:auto;
+    min-width:80px;
 	height:25px;
 	border-radius: 16px;
 	text-align: center;
-	margin: 0 20px 12px 0;
-	padding: 7px 0 0 0;
+	margin: 0 12px 0 0;
+	padding: 7px 9px 0 9px;
 	font-family: "Guardian Agate Sans", Arial, sans-serif;
 	font-size: 15px;
 	color: #FFFFFF;
@@ -910,20 +983,20 @@ line.link {
 
 .copy-holder-top {
     clear: right;
-    color: #005689;
-    float: left;
-    font-family: "Guardian Egyptian Headline",Georgia,serif;
-    font-size: 2.2em;
-    font-weight: 200;
-    line-height: 1.3em; 
-    margin: 12px 0 12px 10px;
-    max-width: 940px;
-    min-width: 320px;
-    padding: 3px 0 0 0;
-    position: relative;
-    left: 0px;
-    height: 96px;
-    width: 100%;
+	color: #005689;
+	float: left;
+	font-family: "Guardian Egyptian Headline",Georgia,serif;
+	font-size: 2.2em;
+	font-weight: 200;
+	line-height: 1.3em;
+	margin: 0px 0 12px 10px;
+	max-width: 940px;
+	min-width: 320px;
+	padding: 3px 0 0 0;
+	position: relative;
+	left: 0px;
+	height: 96px;
+	width: 100%;
 }
 
 .large-number-top {
